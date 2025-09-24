@@ -1,0 +1,23 @@
+export interface FormData {
+  message: string
+}
+
+export interface ApiSuccessResponse {
+  message: string
+}
+
+export interface ApiErrorResponse {
+  message?: string
+  nonFieldErrors?: string // might be sent if the word 'error' is the message
+}
+
+export type FormState = 'idle' | 'validating' | 'submitting' | 'success' | 'error'
+
+export interface UseFormSubmitReturn {
+  submitForm: (data: FormData) => Promise<void>
+  isSubmitting: boolean
+  isSuccess: boolean
+  error: string | null
+  successMessage: string | null
+  reset: () => void
+}
