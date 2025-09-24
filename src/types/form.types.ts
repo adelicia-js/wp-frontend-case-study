@@ -17,7 +17,7 @@ export interface UseFormSubmitReturn {
   submitForm: (data: FormData) => Promise<void>
   isSubmitting: boolean
   isSuccess: boolean
-  error: string | null
+  errorMessage: string | null
   successMessage: string | null
-  reset: () => void
+  resetForm: () => void
 }
