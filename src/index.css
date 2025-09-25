@@ -101,12 +101,79 @@
   }
 }
 
+/* Loading Screen Animations */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-1 {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-2 {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-3 {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out forwards;
+}
+
+.animate-bounce-1 {
+  animation: bounce-1 1.4s infinite ease-in-out;
+}
+
+.animate-bounce-2 {
+  animation: bounce-2 1.4s infinite ease-in-out 0.2s;
+}
+
+.animate-bounce-3 {
+  animation: bounce-3 1.4s infinite ease-in-out 0.4s;
+}
+
+
 /* Accessibility Improvements */
 @media (prefers-reduced-motion: reduce) {
   .animate-float,
   .animate-flutter-left,
   .animate-flutter-right,
-  .animate-focus-glow {
+  .animate-focus-glow,
+  .animate-fade-in-up,
+  .animate-bounce-1,
+  .animate-bounce-2,
+  .animate-bounce-3 {
     animation: none;
+  }
+
+  .animate-fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

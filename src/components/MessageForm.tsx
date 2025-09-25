@@ -116,7 +116,7 @@ export default function MessageForm() {
               </span>
             </div>
 
-            {!errors.message && isDirty && !isValid && (
+            {!errors.message && !isDirty && !isValid && (
               <p
                 id="generic-error"
                 className="text-white/80 text-xs sm:text-sm underline underline-offset-4 decoration-dotted decoration-white/40"
@@ -142,28 +142,31 @@ export default function MessageForm() {
             id="action-buttons-box"
             className="mt-3 sm:mt-4 flex flex-col sm:flex-row gap-2 w-full"
           >
-            <button
-              id="reset-button"
-              type="button"
-              onClick={handleReset}
-              className="backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 cursor-pointer flex-1 sm:flex-none"
-            >
-              Clear
-            </button>
-            <button
-              id="submit-button"
-              type="submit"
-              disabled={
-                isSubmitting || !isDirty || isSuccess || !isValid || isError
-              }
-              className="backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed flex-1 sm:flex-none"
-            >
-              {isSubmitting ? "Sending..." : isSuccess ? "Sent!" : "Send"}
-            </button>
+            <div className="flex flex-row gap-2">
+              <button
+                id="reset-button"
+                type="button"
+                onClick={handleReset}
+                className="backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 cursor-pointer flex-1 sm:flex-none"
+              >
+                Clear
+              </button>
+              <button
+                id="submit-button"
+                type="submit"
+                disabled={
+                  isSubmitting || !isDirty || isSuccess || !isValid || isError
+                }
+                className="backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed flex-1 sm:flex-none"
+              >
+                {isSubmitting ? "Sending..." : isSuccess ? "Sent!" : "Send"}
+              </button>
+            </div>
+
             {isSubmitted && (
               <button
                 onClick={handleReset}
-                className="px-3 py-1.5 sm:px-4 sm:py-2 text-white/70 text-xs sm:text-sm underline underline-offset-2 decoration-white/40 cursor-pointer text-center sm:text-left"
+                className="sm:-ml-3 px-3 py-1.5 sm:px-4 sm:py-2 text-white/70 text-xs sm:text-sm underline underline-offset-3 decoration-dotted decoration-white/40 cursor-pointer text-center sm:text-left"
               >
                 Send Another?
               </button>
