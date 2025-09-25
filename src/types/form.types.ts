@@ -11,13 +11,6 @@ export interface ApiErrorResponse {
   nonFieldErrors?: string; // might be sent if the word 'error' is the message
 }
 
-export type FormState =
-  | "idle"
-  | "validating"
-  | "submitting"
-  | "success"
-  | "error";
-
 export interface UseFormSubmitReturn {
   submitForm: (data: FormData) => Promise<void>;
   isSubmitting: boolean;

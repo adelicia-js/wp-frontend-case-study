@@ -11,6 +11,10 @@ import cloud2Image from "../assets/cloud-2.svg";
 import cloud3Image from "../assets/cloud-3.svg";
 
 export default function MessageForm() {
+  const [charCount, setCharCount] = useState(0);
+
+  const [isFocused, setIsFocused] = useState(false);
+
   const {
     submitForm,
     isSubmitting,
@@ -20,8 +24,6 @@ export default function MessageForm() {
     successMessage,
     resetForm: resetSubmit,
   } = useFormSubmit();
-  const [charCount, setCharCount] = useState(0);
-  const [isFocused, setIsFocused] = useState(false);
 
   const {
     register,
@@ -37,6 +39,7 @@ export default function MessageForm() {
 
   const messageValue = watch("message", "");
 
+  // Autocounts characters
   useEffect(() => {
     setCharCount(messageValue.length);
   }, [messageValue]);
@@ -76,19 +79,19 @@ export default function MessageForm() {
       id="form-section"
       className="relative min-h-screen items-center justify-center flex overflow-hidden"
     >
-      {/* bg clouds heheh */}
+      {/* bg clouds */}
       <img
         src={cloud3Image}
         alt=""
         className="absolute top-10 left-8 w-20 sm:w-24 md:w-32 opacity-20 z-0 animate-float invert"
-        style={{ animationDelay: '1s', animationDuration: '8s' }}
+        style={{ animationDelay: "1s", animationDuration: "8s" }}
       />
 
       <img
         src={cloud2Image}
         alt=""
         className="absolute top-16 right-12 w-24 sm:w-32 md:w-40 opacity-25 z-0 animate-float invert"
-        style={{ animationDelay: '3s', animationDuration: '10s' }}
+        style={{ animationDelay: "3s", animationDuration: "10s" }}
       />
 
       <img
@@ -101,7 +104,7 @@ export default function MessageForm() {
         src={cloud2Image}
         alt=""
         className="absolute top-1/3 left-1/4 w-16 sm:w-20 md:w-24 opacity-20 z-0 animate-float invert"
-        style={{ animationDelay: '5s', animationDuration: '12s' }}
+        style={{ animationDelay: "5s", animationDuration: "12s" }}
       />
 
       <img
@@ -109,13 +112,14 @@ export default function MessageForm() {
         alt=""
         className="absolute bottom-20 right-16 w-18 sm:w-22 md:w-28 opacity-25 z-0 invert"
       />
-      
+
       <div
         id="winged-form-container"
         className={`relative ${
           isFocused ? "animate-focus-glow" : "animate-float"
         } `}
       >
+        {/* left box wing */}
         <img
           src={leftWingImage}
           alt="Left Wing"
@@ -175,6 +179,7 @@ export default function MessageForm() {
               </span>
             </div>
 
+            {/* validation information */}
             {!errors.message && !isDirty && !isValid && (
               <p
                 id="generic-message"
@@ -189,6 +194,7 @@ export default function MessageForm() {
               </p>
             )}
 
+            {/* validation error */}
             {errors.message && (
               <p
                 id="error-message"
@@ -204,6 +210,7 @@ export default function MessageForm() {
             className="mt-6 sm:mt-4 flex flex-col sm:flex-row gap-2 w-full"
           >
             {!isSubmitted ? (
+              // action buttons pre-submission
               <div className="flex flex-row gap-2">
                 <button
                   id="reset-button"
@@ -225,6 +232,7 @@ export default function MessageForm() {
                 </button>
               </div>
             ) : (
+              // action button post submission
               <button
                 id="send-another-button"
                 type="button"
@@ -237,6 +245,7 @@ export default function MessageForm() {
           </div>
         </form>
 
+        {/* right box wing */}
         <img
           id="right-wing-image"
           src={rightWingImage}
@@ -245,6 +254,7 @@ export default function MessageForm() {
         />
       </div>
 
+      {/* shows if message is sent successfully */}
       {isSuccess && successMessage && (
         <div
           id="success-box"
@@ -259,6 +269,7 @@ export default function MessageForm() {
         </div>
       )}
 
+      {/* shows if an error occurs during submission */}
       {errorMessage && !isSuccess && (
         <div
           id="error-box"
