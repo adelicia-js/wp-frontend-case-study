@@ -38,6 +38,26 @@ export default function MessageForm() {
     setCharCount(messageValue.length);
   }, [messageValue]);
 
+  // Autoclears success message
+  useEffect(() => {
+    if (isSuccess && successMessage) {
+      const timer = setTimeout(() => {
+        resetSubmit();
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess, successMessage, resetSubmit]);
+
+  // Autoclears error message
+  useEffect(() => {
+    if (errorMessage && !isSuccess) {
+      const timer = setTimeout(() => {
+        resetSubmit();
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage, isSuccess, resetSubmit]);
+
   const onSubmit = async (data: MessageFormData) => {
     await submitForm(data);
   };
@@ -68,7 +88,7 @@ export default function MessageForm() {
         <form
           onSubmit={handleSubmit(onSubmit)}
           id="message-form"
-          className={`relative backdrop-blur-md bg-blue-200/20 sm:bg-blue-200/40 border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl sm:shadow-2xl z-10 mx-4 sm:mx-0 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none ${
+          className={`w-[80vw] md:w-[50vw] xl:w-[30vw] relative backdrop-blur-md bg-blue-200/20 sm:bg-blue-200/30 border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl sm:shadow-2xl z-10 mx-4 sm:mx-0 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none ${
             isFocused ? "outline" : ""
           } outline-offset-2 outline-white/20 `}
         >
@@ -111,7 +131,7 @@ export default function MessageForm() {
                       ? "text-red-600/50 font-medium"
                       : charCount > 0
                       ? "text-white/70"
-                      : "text-white/30"
+                      : "text-white/40"
                   } text-xs whitespace-nowrap`}
               >
                 {charCount}/10
@@ -146,32 +166,33 @@ export default function MessageForm() {
             id="action-buttons-box"
             className="mt-6 sm:mt-4 flex flex-col sm:flex-row gap-2 w-full"
           >
-            <div className="flex flex-row gap-2">
-              <button
-                id="reset-button"
-                type="button"
-                onClick={handleReset}
-                className="font-extralight backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 cursor-pointer flex-1 sm:flex-none"
-              >
-                Clear
-              </button>
-              <button
-                id="submit-button"
-                type="submit"
-                disabled={
-                  isSubmitting || !isDirty || isSuccess || !isValid || isError
-                }
-                className="font-extralight backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed flex-1 sm:flex-none"
-              >
-                {isSubmitting ? "Sending..." : isSuccess ? "Sent!" : "Send"}
-              </button>
-            </div>
-
-            {isSubmitted && (
+            {!isSubmitted ? (
+              <div className="flex flex-row gap-2">
+                <button
+                  id="reset-button"
+                  type="button"
+                  onClick={handleReset}
+                  className="font-extralight backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 cursor-pointer flex-1 sm:flex-none"
+                >
+                  Clear
+                </button>
+                <button
+                  id="submit-button"
+                  type="submit"
+                  disabled={
+                    isSubmitting || !isDirty || isSuccess || !isValid || isError
+                  }
+                  className="font-extralight backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed flex-1 sm:flex-none"
+                >
+                  {isSubmitting ? "Sending..." : isSuccess ? "Sent!" : "Send"}
+                </button>
+              </div>
+            ) : (
               <button
                 id="send-another-button"
+                type="button"
                 onClick={handleReset}
-                className="font-light sm:-ml-3 px-3 py-1.5 sm:px-4 sm:py-2 text-white/70 text-xs sm:text-sm underline underline-offset-3 decoration-dotted decoration-white/40 cursor-pointer text-center sm:text-left"
+                className="font-extralight backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 cursor-pointer w-full sm:w-auto"
               >
                 Send Another?
               </button>
