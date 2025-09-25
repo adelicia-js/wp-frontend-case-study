@@ -119,7 +119,7 @@ export default function MessageForm() {
         <img
           src={leftWingImage}
           alt="Left Wing"
-          className="hidden md:block absolute top-[30%] md:-left-24 lg:-left-32 w-28 md:w-32 lg:w-40 h-28 md:h-32 lg:h-40 opacity-30 md:opacity-40 lg:opacity-50 z-0 animate-flutter-left invert scale-y-75"
+          className="hidden md:block absolute top-[30%] md:-left-24 lg:-left-32 w-28 md:w-32 lg:w-40 h-28 md:h-32 lg:h-40 opacity-40 z-0 animate-flutter-left invert scale-y-75"
         />
 
         <form
@@ -156,7 +156,7 @@ export default function MessageForm() {
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 disabled={isSubmitting || isSuccess || isSubmitted}
-                placeholder="Enter your message here"
+                placeholder="Type your message here :)"
                 className="tracking-wide backdrop-blur-sm bg-gray-100/5 disabled:opacity-50 border border-white/30 rounded-lg px-2 py-1.5 sm:px-3 sm:py-2 placeholder-white/60 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-white/30 disabled:cursor-not-allowed flex-1 max-w-full min-w-0"
               />
 
@@ -241,7 +241,7 @@ export default function MessageForm() {
           id="right-wing-image"
           src={rightWingImage}
           alt="Right Wing"
-          className="hidden md:block absolute top-[30%] md:-right-24 lg:-right-32 w-28 md:w-32 lg:w-40 h-28 md:h-32 lg:h-40 opacity-30 md:opacity-40 lg:opacity-50 z-0 animate-flutter-right invert scale-y-75"
+          className="hidden md:block absolute top-[30%] md:-right-24 lg:-right-32 w-28 md:w-32 lg:w-40 h-28 md:h-32 lg:h-40 opacity-40 z-0 animate-flutter-right invert scale-y-75"
         />
       </div>
 

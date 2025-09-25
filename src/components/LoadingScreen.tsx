@@ -28,7 +28,7 @@ export default function LoadingScreen() {
           className="w-2 h-2 sm:w-3 sm:h-3 bg-white/60 rounded-full animate-bounce-1"
         ></div>
         <div
-          id="loading-dot-3"
+          id="loading-dot-2"
           className="w-2 h-2 sm:w-3 sm:h-3 bg-white/60 rounded-full animate-bounce-2"
         ></div>
         <div
