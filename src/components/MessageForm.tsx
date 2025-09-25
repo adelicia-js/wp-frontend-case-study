@@ -46,7 +46,7 @@ export default function MessageForm() {
     if (isSuccess && successMessage) {
       const timer = setTimeout(() => {
         resetSubmit();
-      }, 1500);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [isSuccess, successMessage, resetSubmit]);
@@ -56,7 +56,7 @@ export default function MessageForm() {
     if (errorMessage && !isSuccess) {
       const timer = setTimeout(() => {
         resetSubmit();
-      }, 1500);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [errorMessage, isSuccess, resetSubmit]);
