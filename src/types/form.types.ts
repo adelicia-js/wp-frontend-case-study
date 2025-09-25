@@ -1,23 +1,29 @@
 export interface FormData {
-  message: string
+  message: string;
 }
 
 export interface ApiSuccessResponse {
-  message: string
+  message: string;
 }
 
 export interface ApiErrorResponse {
-  message?: string
-  nonFieldErrors?: string // might be sent if the word 'error' is the message
+  message?: string;
+  nonFieldErrors?: string; // might be sent if the word 'error' is the message
 }
 
-export type FormState = 'idle' | 'validating' | 'submitting' | 'success' | 'error'
+export type FormState =
+  | "idle"
+  | "validating"
+  | "submitting"
+  | "success"
+  | "error";
 
 export interface UseFormSubmitReturn {
-  submitForm: (data: FormData) => Promise<void>
-  isSubmitting: boolean
-  isSuccess: boolean
-  errorMessage: string | null
-  successMessage: string | null
-  resetForm: () => void
+  submitForm: (data: FormData) => Promise<void>;
+  isSubmitting: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+  errorMessage: string | null;
+  successMessage: string | null;
+  resetForm: () => void;
 }

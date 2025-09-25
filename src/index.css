@@ -88,3 +88,25 @@
 .animate-focus-glow {
   animation: gentle-glow 3s ease-in-out infinite;
 }
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .animate-float {
+    animation: float 10s ease-in-out infinite;
+    transform-origin: center center;
+  }
+
+  .animate-focus-glow {
+    animation: none;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-flutter-left,
+  .animate-flutter-right,
+  .animate-focus-glow {
+    animation: none;
+  }
+}

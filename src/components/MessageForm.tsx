@@ -12,6 +12,7 @@ export default function MessageForm() {
     submitForm,
     isSubmitting,
     isSuccess,
+    isError,
     errorMessage,
     successMessage,
     resetForm: resetSubmit,
@@ -60,25 +61,28 @@ export default function MessageForm() {
         <img
           src={leftWingImage}
           alt="Left Wing"
-          className="absolute top-[30%] -left-32 w-40 h-40 opacity-50 z-0 animate-flutter-left invert scale-y-75"
+          className="hidden md:block absolute top-[30%] md:-left-24 lg:-left-32 w-28 md:w-32 lg:w-40 h-28 md:h-32 lg:h-40 opacity-30 md:opacity-40 lg:opacity-50 z-0 animate-flutter-left invert scale-y-75"
         />
 
         <form
           onSubmit={handleSubmit(onSubmit)}
           id="message-form"
-          className={`relative backdrop-blur-md bg-blue-200/40 border border-white/20 rounded-2xl p-8 shadow-2xl z-10 ${
+          className={`relative backdrop-blur-md bg-blue-200/20 sm:bg-blue-200/40 border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl sm:shadow-2xl z-10 mx-4 sm:mx-0 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none ${
             isFocused ? "outline" : ""
           } outline-offset-2 outline-white/20 `}
         >
-          <h2 id="form-title" className="lg:text-4xl text-white">
+          <h2
+            id="form-title"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white"
+          >
             Send a message to us.
           </h2>
 
-          <div className="flex items-baseline flex-col gap-4">
+          <div className="flex items-baseline flex-col gap-4 sm:gap-3 lg:gap-4">
             <label
               id="message-input-label"
               htmlFor="message"
-              className="text-white/70"
+              className="text-white/70 text-xs sm:text-base"
             >
               Got something to say?
             </label>
@@ -95,7 +99,7 @@ export default function MessageForm() {
                 onBlur={() => setIsFocused(false)}
                 disabled={isSubmitting || isSuccess || isSubmitted}
                 placeholder="Enter your message here"
-                className="backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg px-3 py-2 placeholder-white/60 text-white focus:outline-none focus:ring-2 focus:ring-white/30 disabled:cursor-not-allowed"
+                className="backdrop-blur-sm bg-white/10 disabled:opacity-50 border border-white/30 rounded-lg px-2 py-1.5 sm:px-3 sm:py-2 placeholder-white/60 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-white/30 disabled:cursor-not-allowed flex-1 min-w-0"
               />
 
               <span
@@ -106,7 +110,7 @@ export default function MessageForm() {
                     : charCount > 0
                     ? "text-white/70"
                     : "text-white/30"
-                } text-sm  `}
+                } text-xs sm:text-sm whitespace-nowrap`}
               >
                 {charCount}/10
               </span>
@@ -115,44 +119,51 @@ export default function MessageForm() {
             {!errors.message && isDirty && !isValid && (
               <p
                 id="generic-error"
-                className="text-white/80 text-sm underline underline-offset-4 decoration-dotted decoration-white/40"
+                className="text-white/80 text-xs sm:text-sm underline underline-offset-4 decoration-dotted decoration-white/40"
               >
-                <span>Enter 1-10 characters. </span>
-                <span className="">Exclamation marks (!) are not allowed.</span>
+                <span className="block lg:inline">Enter 1-10 characters. </span>
+                <span className="block lg:inline">
+                  Exclamation marks (!) are not allowed.
+                </span>
               </p>
             )}
 
             {errors.message && (
               <p
                 id="error-message"
-                className="text-red-600/50 text-sm font-semibold"
+                className="text-red-600/50 text-xs sm:text-sm font-semibold"
               >
                 {errors.message.message}
               </p>
             )}
           </div>
 
-          <div id="action-buttons-box" className="mt-4 flex gap-2">
+          <div
+            id="action-buttons-box"
+            className="mt-3 sm:mt-4 flex flex-col sm:flex-row gap-2 w-full"
+          >
             <button
               id="reset-button"
               type="button"
               onClick={handleReset}
-              className="backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-4 py-2 text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 cursor-pointer"
+              className="backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 cursor-pointer flex-1 sm:flex-none"
             >
               Clear
             </button>
             <button
               id="submit-button"
               type="submit"
-              disabled={isSubmitting || !isDirty || isSuccess || !isValid}
-              className="backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-4 py-2 text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+              disabled={
+                isSubmitting || !isDirty || isSuccess || !isValid || isError
+              }
+              className="backdrop-blur-sm bg-white/20 border border-white/30 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed flex-1 sm:flex-none"
             >
               {isSubmitting ? "Sending..." : isSuccess ? "Sent!" : "Send"}
             </button>
             {isSubmitted && (
               <button
                 onClick={handleReset}
-                className="px-4 py-2 text-white/70 text-sm underline underline-offset-2 decoration-white/40 cursor-pointer"
+                className="px-3 py-1.5 sm:px-4 sm:py-2 text-white/70 text-xs sm:text-sm underline underline-offset-2 decoration-white/40 cursor-pointer text-center sm:text-left"
               >
                 Send Another?
               </button>
@@ -163,33 +174,37 @@ export default function MessageForm() {
         <img
           src={rightWingImage}
           alt="Right Wing"
-          className="absolute top-[30%] -right-32 w-40 h-40 opacity-50 z-0 animate-flutter-right invert scale-y-75 "
+          className="hidden md:block absolute top-[30%] md:-right-24 lg:-right-32 w-28 md:w-32 lg:w-40 h-28 md:h-32 lg:h-40 opacity-30 md:opacity-40 lg:opacity-50 z-0 animate-flutter-right invert scale-y-75"
         />
-
       </div>
 
-      
-        {isSuccess && successMessage && (
+      {isSuccess && successMessage && (
         <div
           id="success-box"
-          className="absolute top-[2%] right-[2%] p-3 backdrop-blur-sm bg-green-500/40 border border-green-400/30 rounded-lg"
+          className="absolute max-w-fit h-fit bottom-50 sm:top-4 sm:right-4 sm:left-auto p-2 sm:p-3 backdrop-blur-sm bg-green-500/40 border border-green-400/30 rounded-lg z-50"
         >
-          <p id="success-message" className="text-green-100">
+          <p
+            id="success-message"
+            className=" text-green-100 text-xs sm:text-sm text-center sm:text-left"
+          >
             Thank you for your message! :D
           </p>
         </div>
-        )}
+      )}
 
-        {errorMessage && !isSuccess && (
+      {errorMessage && !isSuccess && (
         <div
           id="error-box"
-          className="absolute top-[2%] right-[2%] p-3 backdrop-blur-sm bg-red-500/40 border border-red-400/30 rounded-lg"
+          className="absolute max-w-fit h-fit bottom-50 sm:top-4 sm:right-4 sm:left-auto p-2 sm:p-3 backdrop-blur-sm bg-red-500/40 border border-red-400/30 rounded-lg z-50"
         >
-          <p id="submission-error" className="text-red-100">
+          <p
+            id="submission-error"
+            className="text-red-100 text-xs sm:text-sm text-center sm:text-left"
+          >
             {errorMessage}
           </p>
         </div>
-        )}
+      )}
     </section>
   );
 }

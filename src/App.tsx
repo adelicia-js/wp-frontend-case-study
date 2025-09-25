@@ -2,7 +2,7 @@ import MessageForm from './components/MessageForm'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-300 via-blue-400 to-cyan-300">
+    <div className="min-h-screen bg-gradient-to-b from-purple-500 to-cyan-500 sm:bg-gradient-to-br sm:from-purple-300 sm:via-blue-400 sm:to-cyan-300">
       <MessageForm />
     </div>
   )
