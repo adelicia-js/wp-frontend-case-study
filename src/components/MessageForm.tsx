@@ -75,7 +75,7 @@ export default function MessageForm() {
             id="form-title"
             className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white"
           >
-            Send a message to us.
+            Got something to say?
           </h2>
 
           <div className="flex items-baseline flex-col gap-4 sm:gap-3 lg:gap-4">
@@ -84,11 +84,11 @@ export default function MessageForm() {
               htmlFor="message"
               className="text-white/70 text-xs sm:text-base"
             >
-              Got something to say?
+              Send a message to us.
             </label>
             <div
               id="message-input-box"
-              className="flex justify-center items-center gap-2"
+              className="relative flex justify-center items-center gap-2 w-full"
             >
               <input
                 {...register("message")}
@@ -99,18 +99,19 @@ export default function MessageForm() {
                 onBlur={() => setIsFocused(false)}
                 disabled={isSubmitting || isSuccess || isSubmitted}
                 placeholder="Enter your message here"
-                className="backdrop-blur-sm bg-white/10 disabled:opacity-50 border border-white/30 rounded-lg px-2 py-1.5 sm:px-3 sm:py-2 placeholder-white/60 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-white/30 disabled:cursor-not-allowed flex-1 min-w-0"
+                className="backdrop-blur-sm bg-white/10 disabled:opacity-50 border border-white/30 rounded-lg px-2 py-1.5 sm:px-3 sm:py-2 placeholder-white/60 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-white/30 disabled:cursor-not-allowed flex-1 max-w-full min-w-0"
               />
 
               <span
                 id="char-counter"
-                className={`${
+                className={`sm:absolute right-0 -bottom-5
+                  ${
                   charCount > 10
                     ? "text-red-600/50 font-semibold"
                     : charCount > 0
                     ? "text-white/70"
                     : "text-white/30"
-                } text-xs sm:text-sm whitespace-nowrap`}
+                } text-xs whitespace-nowrap`}
               >
                 {charCount}/10
               </span>
@@ -119,7 +120,7 @@ export default function MessageForm() {
             {!errors.message && !isDirty && !isValid && (
               <p
                 id="generic-error"
-                className="text-white/80 text-xs sm:text-sm underline underline-offset-4 decoration-dotted decoration-white/40"
+                className="-mb-2 sm:mt-2 text-white/80 text-xs sm:text-sm underline underline-offset-4 decoration-dotted decoration-white/40"
               >
                 <span className="block lg:inline">Enter 1-10 characters. </span>
                 <span className="block lg:inline">
@@ -131,7 +132,7 @@ export default function MessageForm() {
             {errors.message && (
               <p
                 id="error-message"
-                className="text-red-600/50 text-xs sm:text-sm font-semibold"
+                className="text-red-600/50 text-xs sm:text-sm font-semibold -mb-2"
               >
                 {errors.message.message}
               </p>
@@ -140,7 +141,7 @@ export default function MessageForm() {
 
           <div
             id="action-buttons-box"
-            className="mt-3 sm:mt-4 flex flex-col sm:flex-row gap-2 w-full"
+            className="mt-6 sm:mt-4 flex flex-col sm:flex-row gap-2 w-full"
           >
             <div className="flex flex-row gap-2">
               <button
