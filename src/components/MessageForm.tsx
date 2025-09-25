@@ -6,6 +6,9 @@ import useFormSubmit from "../hooks/useFormSubmit";
 import { useState, useEffect } from "react";
 import leftWingImage from "../assets/left-wing.svg";
 import rightWingImage from "../assets/right-wing.svg";
+import cloud1Image from "../assets/cloud-1.svg";
+import cloud2Image from "../assets/cloud-2.svg";
+import cloud3Image from "../assets/cloud-3.svg";
 
 export default function MessageForm() {
   const {
@@ -73,6 +76,40 @@ export default function MessageForm() {
       id="form-section"
       className="relative min-h-screen items-center justify-center flex overflow-hidden"
     >
+      {/* bg clouds heheh */}
+      <img
+        src={cloud3Image}
+        alt=""
+        className="absolute top-10 left-8 w-20 sm:w-24 md:w-32 opacity-20 z-0 animate-float invert"
+        style={{ animationDelay: '1s', animationDuration: '8s' }}
+      />
+
+      <img
+        src={cloud2Image}
+        alt=""
+        className="absolute top-16 right-12 w-24 sm:w-32 md:w-40 opacity-25 z-0 animate-float invert"
+        style={{ animationDelay: '3s', animationDuration: '10s' }}
+      />
+
+      <img
+        src={cloud1Image}
+        alt=""
+        className="absolute -bottom-12 -left-8 w-40 sm:w-48 md:w-56 lg:w-64 opacity-15 z-0 invert"
+      />
+
+      <img
+        src={cloud2Image}
+        alt=""
+        className="absolute top-1/3 left-1/4 w-16 sm:w-20 md:w-24 opacity-20 z-0 animate-float invert"
+        style={{ animationDelay: '5s', animationDuration: '12s' }}
+      />
+
+      <img
+        src={cloud3Image}
+        alt=""
+        className="absolute bottom-20 right-16 w-18 sm:w-22 md:w-28 opacity-25 z-0 invert"
+      />
+      
       <div
         id="winged-form-container"
         className={`relative ${
